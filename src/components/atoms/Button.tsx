@@ -10,8 +10,8 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string; // If provided, renders as <a> instead of <button>
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
+  startIcon?: React.ReactNode | (() => React.ReactNode);
+  endIcon?: React.ReactNode | (() => React.ReactNode);
   loading?: boolean;
 }
 

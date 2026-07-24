@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Button, Input, Label, Textarea, Select, Avatar, Badge } from "@/components/atoms";
+import { Button, Input, Label, Textarea, Avatar, Badge } from "@/components/atoms";
 import { useDesignTokens } from "@/lib/designTokens";
 
 export default function DemoPage() {
@@ -191,7 +193,7 @@ export default function DemoPage() {
               <span className="w-20 text-text-xs font-mono">16px:</span>
               <div className="h-0.5 w-16 bg-text/20" style={{ marginBottom: '16px' }}></div>
             </div>
-            <div class="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <span className="w-20 text-text-xs font-mono">24px:</span>
               <div className="h-0.5 w-16 bg-text/20" style={{ marginBottom: '24px' }}></div>
             </div>

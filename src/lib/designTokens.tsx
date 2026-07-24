@@ -1,18 +1,5 @@
-import React context for the design tokens so they can be easily accessed in JavaScript/TypeScript code.
+"use client";
 
-
-
-
-
-
-
-]++;
- let me create a design tokens context.
-
-
-<tool_call>
-<function=Write>
-<parameter=content>
 import React, { createContext, useContext } from 'react';
 
 interface DesignTokens {

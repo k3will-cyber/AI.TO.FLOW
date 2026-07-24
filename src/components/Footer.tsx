@@ -1,7 +1,7 @@
 "use client";
 
 import { Heart, ArrowUp } from "lucide-react";
-import { Button } from "./atoms/Button";
+import { Button } from "./atoms";
 
 const footerLinks = {
   produto: [

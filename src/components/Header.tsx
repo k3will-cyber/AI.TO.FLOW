@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Button } from "./atoms/Button";
+import { Button } from "./atoms";
 
 const navItems = [
   { label: "Diagnóstico", href: "#diagnostic" },

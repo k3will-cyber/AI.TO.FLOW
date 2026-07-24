@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { DesignTokensProvider } from "./lib/designTokens";
+import "@/design-system/index.css";
+import { DesignTokensProvider } from "@/lib/designTokens";
 
 export const metadata: Metadata = {
   title: "Alto Flow OS — AI Business Operating System",

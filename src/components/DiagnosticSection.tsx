@@ -330,7 +330,6 @@ export default function DiagnosticSection() {
               </div>
 
               <div className="space-y-1.5">
-                1.5">
                 <Label htmlFor="industry" required>
                   Segmento
                 </Label>
@@ -527,7 +526,6 @@ export default function DiagnosticSection() {
                   Refazer Diagnóstico
                 </Button>
                 <Button
-                  asChild
                   href="#solutions"
                   variant="primary"
                   size="md"
