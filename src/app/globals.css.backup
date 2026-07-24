@@ -1,0 +1,114 @@
+/* Backup of original globals.css */
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #FF4DA6;
+  --color-primary-light: #FF7ABE;
+  --color-primary-dark: #E0248A;
+  --color-secondary: #050505;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F8F8FA;
+  --color-ink: #050505;
+  --color-muted: #8888A0;
+  --color-line: #E8E8EE;
+  --color-line-strong: #D0D0D8;
+  --color-glass-bg-bg, 0.85);
+  --color-glass-border: rgba(5, 5, 5, 0.08);
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 40px;
+}
+
+/* Font loading */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --grid-cols: 12;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 77, 166, 0.2);
+  color: var(--color-ink);
+}
+
+/* Glass morphism utility */
+.glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* Container */
+.container-wide {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+/* Editable section styles */
+[contenteditable="true"] {
+  outline: none;
+  transition: background 0.15s ease;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+[contenteditable="true"]:hover {
+  background: rgba(255, 77, 166, 0.04);
+}
+[contenteditable="true"]:focus {
+  background: rgba(255, 77, 166, 0.06);
+  box-shadow: 0 0 0 2px rgba(255, 77, 166, 0.15);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 77, 166, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(255, 77, 166, 0.25); }
+}
+
+/* Print styles */
+@media print {
+  .no-print { display: none; }
+  [contenteditable] { outline: none !important; box-shadow: none !important; }
+}

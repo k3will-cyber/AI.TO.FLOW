@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" fill="none">
+  <rect width="600" height="420" fill="#0d0d0d"/>
+  <rect width="600" height="40" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="20" cy="20" r="5" fill="#FF5F57"/>
+  <circle cx="36" cy="20" r="5" fill="#FEBC2E"/>
+  <circle cx="52" cy="20" r="5" fill="#28C840"/>
+  <rect x="80" y="14" width="440" height="12" rx="6" fill="rgba(255,255,255,0.06)"/>
+  
+  <!-- Hero with gradient -->
+  <rect x="0" y="40" width="600" height="200" fill="url(#g4)"/>
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="600" y2="200">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Hero text -->
+  <rect x="40" y="70" width="180" height="8" rx="4" fill="#F59E0B" opacity="0.6"/>
+  <rect x="40" y="90" width="280" height="16" rx="4" fill="rgba(255,255,255,0.15)"/>
+  <rect x="40" y="114" width="200" height="8" rx="4" fill="rgba(255,255,255,0.08)"/>
+  
+  <!-- Circle avatar -->
+  <circle cx="480" cy="140" r="50" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="480" cy="140" r="35" fill="#F59E0B" opacity="0.1"/>
+  
+  <rect x="40" y="150" width="140" height="32" rx="16" fill="#F59E0B"/>
+  
+  <!-- Plan cards -->
+  <rect x="24" y="260" width="172" height="70" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <rect x="36" y="276" width="80" height="8" rx="4" fill="rgba(255,255,255,0.12)"/>
+  <rect x="36" y="292" width="60" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="36" y="306" width="60" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="130" y="274" width="40" height="14" rx="4" fill="rgba(255,255,255,0.15)"/>
+  
+  <rect x="214" y="260" width="172" height="70" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <rect x="226" y="276" width="80" height="8" rx="4" fill="rgba(255,255,255,0.12)"/>
+  <rect x="226" y="292" width="60" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="226" y="306" width="60" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="320" y="274" width="40" height="14" rx="4" fill="#F59E0B"/>
+  
+  <rect x="404" y="260" width="172" height="70" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <rect x="416" y="276" width="80" height="8" rx="4" fill="rgba(255,255,255,0.12)"/>
+  <rect x="416" y="292" width="60" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="416" y="306" width="60" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="510" y="274" width="40" height="14" rx="4" fill="rgba(255,255,255,0.15)"/>
+  
+  <!-- Testimonial -->
+  <rect x="24" y="350" width="552" height="40" rx="8" fill="rgba(255,255,255,0.02)"/>
+  <rect x="40" y="362" width="300" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  <rect x="40" y="374" width="200" height="6" rx="3" fill="rgba(255,255,255,0.06)"/>
+  
+  <text x="300" y="410" text-anchor="middle" fill="rgba(255,255,255,0.12)" font-size="9" font-family="monospace">Personal Trainer</text>
+</svg>

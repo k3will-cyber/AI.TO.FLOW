@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" fill="none">
+  <rect width="600" height="420" fill="#0c0c1d"/>
+  <rect width="600" height="40" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="20" cy="20" r="5" fill="#FF5F57"/>
+  <circle cx="36" cy="20" r="5" fill="#FEBC2E"/>
+  <circle cx="52" cy="20" r="5" fill="#28C840"/>
+  <rect x="80" y="14" width="440" height="12" rx="6" fill="rgba(255,255,255,0.06)"/>
+  
+  <!-- Dashboard sidebar -->
+  <rect x="0" y="40" width="60" height="380" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="30" cy="68" r="12" fill="rgba(255,255,255,0.06)"/>
+  <rect x="14" y="100" width="32" height="32" rx="6" fill="#3B82F6" opacity="0.15"/>
+  <rect x="14" y="144" width="32" height="32" rx="6" fill="rgba(255,255,255,0.04)"/>
+  <rect x="14" y="188" width="32" height="32" rx="6" fill="rgba(255,255,255,0.04)"/>
+  <rect x="14" y="232" width="32" height="32" rx="6" fill="rgba(255,255,255,0.04)"/>
+  
+  <!-- Main content -->
+  <rect x="76" y="56" width="220" height="18" rx="4" fill="rgba(255,255,255,0.12)"/>
+  <rect x="76" y="82" width="120" height="8" rx="4" fill="rgba(255,255,255,0.06)"/>
+  
+  <!-- Cards -->
+  <rect x="76" y="110" width="158" height="90" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <rect x="76" y="110" width="158" height="50" rx="8" fill="#3B82F6" opacity="0.08"/>
+  <rect x="88" y="170" width="50" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+  
+  <rect x="246" y="110" width="158" height="90" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <rect x="246" y="110" width="158" height="50" rx="8" fill="#22C55E" opacity="0.08"/>
+  <rect x="258" y="170" width="50" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+  
+  <rect x="416" y="110" width="158" height="90" rx="8" fill="rgba(255,255,255,0.03)"/>
+  <rect x="416" y="110" width="158" height="50" rx="8" fill="#F59E0B" opacity="0.08"/>
+  <rect x="428" y="170" width="50" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+  
+  <!-- Table -->
+  <rect x="76" y="220" width="498" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+  <rect x="76" y="236" width="498" height="6" rx="3" fill="rgba(255,255,255,0.03)"/>
+  <rect x="76" y="250" width="498" height="6" rx="3" fill="rgba(255,255,255,0.03)"/>
+  <rect x="76" y="264" width="498" height="6" rx="3" fill="rgba(255,255,255,0.03)"/>
+  <rect x="76" y="278" width="498" height="6" rx="3" fill="rgba(255,255,255,0.03)"/>
+  <rect x="76" y="292" width="498" height="6" rx="3" fill="rgba(255,255,255,0.03)"/>
+  
+  <rect x="76" y="316" width="130" height="28" rx="14" fill="#3B82F6"/>
+  
+  <text x="300" y="410" text-anchor="middle" fill="rgba(255,255,255,0.12)" font-size="9" font-family="monospace">Oficina Inteligente</text>
+</svg>

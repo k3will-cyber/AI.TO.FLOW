@@ -1,0 +1,1739 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Alto Flow OS — Transforme seu negócio com automação inteligente. Mais clientes, mais vendas, mais resultados." />
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/logo/logo.svg" />
+  <title>Alto Flow OS — Automação Inteligente para seu Negócio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0a; color: #e8e8e8;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; border: 0; background: none; }
+    ul { list-style: none; }
+
+    :root {
+      --primary: #FF4DA6; --primary-light: #FF7ABE; --primary-dark: #E0248A;
+      --secondary: #050505; --bg: #0a0a0a; --bg-alt: #0f0f0f;
+      --ink: #e8e8e8; --muted: #8888A0;
+      --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.12);
+      --radius: 12px; --radius-lg: 20px; --radius-xl: 28px; --radius-2xl: 40px;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    /* Preloader */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #050505;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 24px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #preloader .pl-logo {
+      width: 80px; height: 80px; border-radius: 20px; background: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      animation: pl-pulse 1.5s ease-in-out infinite;
+      overflow: hidden;
+    }
+    #preloader .pl-logo video { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+    #preloader .pl-bar {
+      width: 160px; height: 3px; border-radius: 9999px;
+      background: rgba(255,255,255,0.08); overflow: hidden;
+    }
+    #preloader .pl-bar-fill {
+      height: 100%; width: 0%; border-radius: 9999px;
+      background: var(--primary);
+      animation: pl-fill 1.2s ease forwards;
+    }
+    @keyframes pl-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,77,166,0.3); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 16px rgba(255,77,166,0); }
+    }
+    @keyframes pl-fill { to { width: 100%; } }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+    ::selection { background: rgba(255, 77, 166, 0.2); color: var(--ink); }
+
+    .container-wide { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); }
+    .font-mono { font-family: var(--font-mono); }
+    .font-serif { font-family: var(--font-serif); }
+    .text-primary { color: var(--primary); }
+    .text-muted { color: var(--muted); }
+    .text-ink { color: var(--ink); }
+
+    .glass {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border: 0; border-radius: 9999px;
+      font-size: 14px; font-weight: 600; color: #fff;
+      background: var(--primary); cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(255,77,166,0.2);
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255,77,166,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border: 0; border-radius: 9999px;
+      font-size: 14px; font-weight: 500; color: var(--ink);
+      background: rgba(255,255,255,0.06); cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+    .section-label {
+      display: inline-block; padding: 4px 12px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      font-family: var(--font-mono); color: var(--primary);
+      background: rgba(255,77,166,0.05); border: 1px solid rgba(255,77,166,0.1);
+      border-radius: 9999px; margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--font-serif); font-weight: 400;
+      font-size: clamp(28px,4vw,48px); line-height: 1.05; letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .section-desc { font-size: 15px; color: #999; max-width: 480px; line-height: 1.7; }
+
+    /* Header */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .site-header.scrolled { background: rgba(10,10,10,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); box-shadow: 0 1px 8px rgba(0,0,0,0.3); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .header-logo { display: flex; align-items: center; gap: 10px; }
+    .header-logo img, .header-logo video { width: 32px; height: 32px; border-radius: 8px; }
+    .header-logo .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .header-logo .logo-text .name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+    .header-logo .logo-text .sub { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: -2px; }
+    .header-nav { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 768px) { .header-nav { display: flex; } }
+    .header-nav a {
+      padding: 8px 14px; font-size: 13px; font-weight: 500; color: var(--muted);
+      border-radius: 8px; transition: color 0.2s, background 0.2s;
+    }
+    .header-nav a:hover { color: var(--ink); background: rgba(255,255,255,0.05); }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .header-cta { display: none; }
+    @media (min-width: 640px) { .header-cta { display: inline-flex; } }
+    .header-cta a {
+      padding: 9px 18px; font-size: 13px; font-weight: 600; color: #fff;
+      background: var(--primary); border-radius: 9999px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .header-cta a:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .menu-btn {
+      display: flex; width: 40px; height: 40px; align-items: center; justify-content: center;
+      border: 0; background: none; border-radius: 8px; color: var(--ink);
+    }
+    @media (min-width: 768px) { .menu-btn { display: none; } }
+    .menu-btn:hover { background: rgba(255,255,255,0.06); }
+
+    .mobile-nav {
+      overflow: hidden; transition: max-height 0.3s, opacity 0.3s;
+      max-height: 0; opacity: 0;
+    }
+    .mobile-nav.open { max-height: 400px; opacity: 1; }
+    .mobile-nav-inner { padding: 8px 16px 16px; background: rgba(10,10,10,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mobile-nav a {
+      display: block; padding: 12px 16px; font-size: 14px; font-weight: 500; color: var(--muted);
+      border-radius: 8px; transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .mobile-nav .mobile-cta { margin-top: 12px; display: block; text-align: center; padding: 14px; font-size: 14px; font-weight: 600; color: #fff; background: var(--primary); border-radius: 9999px; }
+
+    /* Hero */
+    .hero {
+      position: relative; min-height: 90svh; display: flex; align-items: center;
+      overflow: hidden; background: #0a0a0a;
+    }
+    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .hero-glow-tl { position: absolute; top: 0; right: 0; width: 50%; height: 50%; background: linear-gradient(135deg, rgba(255,77,166,0.06), transparent); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .hero-glow-br { position: absolute; bottom: 0; left: 0; width: 33%; height: 33%; background: linear-gradient(225deg, rgba(255,77,166,0.04), transparent); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 4rem 4rem; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 10; padding: 96px 0 64px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; background: rgba(255,77,166,0.05); border: 1px solid rgba(255,77,166,0.1);
+      border-radius: 9999px; margin-bottom: 32px; opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .hero-badge span { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; font-family: var(--font-mono); color: var(--primary); }
+    .hero h1 {
+      font-family: var(--font-serif); font-weight: 400; line-height: 0.95; letter-spacing: -0.02em;
+      font-size: clamp(36px,6vw,80px); margin-bottom: 24px; opacity: 0; transform: translateY(24px);
+      animation: fadeUp 0.7s ease 0.1s forwards;
+      color: #fff; transition: letter-spacing 0.4s ease;
+    }
+    .hero h1:hover { letter-spacing: -0.005em; }
+    .hero h1 .accent { color: var(--primary); font-style: italic; }
+    .hero p {
+      max-width: 560px; font-size: clamp(16px,1.3vw,21px); color: #999; line-height: 1.7;
+      margin-bottom: 40px; opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.6s ease 0.25s forwards;
+    }
+    .hero-btns {
+      display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.6s ease 0.35s forwards;
+    }
+    @media (min-width: 640px) { .hero-btns { flex-direction: row; align-items: center; } }
+    .hero-stats {
+      margin-top: 64px; display: flex; flex-wrap: wrap; gap: 32px 48px;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.6s ease 0.5s forwards;
+    }
+    .hero-stats .stat { display: flex; flex-direction: column; gap: 2px; }
+    .hero-stats .stat .num { font-size: clamp(24px,2.5vw,36px); font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+    .hero-stats .stat .lbl { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #777; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* Portfolio — AI TO FLOW Premium Cards */
+    .section-portfolio {
+      position: relative; padding: 120px 0;
+      background: var(--secondary); overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 600px;
+    }
+    .section-portfolio::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,77,166,0.04) 1px, transparent 1px);
+      background-size: 24px 24px; pointer-events: none;
+    }
+    .portfolio-header { text-align: center; margin-bottom: 72px; position: relative; z-index: 2; }
+    .portfolio-header .section-title { color: #fff; }
+    .portfolio-header .section-desc { margin: 0 auto; color: rgba(255,255,255,0.45); }
+
+    .portfolio-grid {
+      display: grid; grid-template-columns: 1fr; gap: 24px;
+      position: relative; z-index: 2;
+    }
+    @media (min-width: 640px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .portfolio-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+    .port-card {
+      position: relative; border-radius: var(--radius-xl); overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0;
+      transition: all 0.5s cubic-bezier(0.17, 0.78, 0.18, 1);
+      cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .port-card::before {
+      content: ''; position: absolute; inset: -1px; z-index: -1;
+      border-radius: var(--radius-xl);
+      background: conic-gradient(from 0deg, transparent, rgba(255,77,166,0.2), transparent, rgba(255,77,166,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      animation: border-rotate 4s linear infinite;
+    }
+    .port-card:hover::before { opacity: 1; }
+    @keyframes border-rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .port-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(5,5,5,0.6) 80%, rgba(5,5,5,0.9) 100%);
+      opacity: 0.6;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .port-card:hover::after { opacity: 0.3; }
+    .port-card .port-glow {
+      position: absolute; top: 50%; left: 50%; width: 300px; height: 300px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255,77,166,0.1), transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+    .port-card:hover .port-glow { opacity: 1; }
+
+    .port-image {
+      position: relative; width: 100%; aspect-ratio: 16/10;
+      overflow: hidden; background: rgba(255,255,255,0.03);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .port-image .port-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.15);
+    }
+    .port-image .port-placeholder svg { width: 40px; height: 40px; opacity: 0.4; }
+    .port-category {
+      position: absolute; top: 16px; left: 16px; z-index: 3;
+      padding: 4px 12px; font-size: 9px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      font-family: var(--font-mono);
+      border-radius: 9999px;
+      background: rgba(5,5,5,0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+    }
+    .port-content {
+      position: relative; z-index: 2;
+      padding: 24px 28px 28px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .port-content h3 {
+      font-size: 18px; font-weight: 600; color: #fff;
+      letter-spacing: -0.01em; line-height: 1.2;
+    }
+    .port-content p {
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+    .port-content .port-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 12px; font-size: 12px; font-weight: 500;
+      color: var(--primary);
+      transition: gap 0.3s ease;
+    }
+    .port-card:hover .port-cta { gap: 12px; }
+    .port-content .port-cta svg {
+      width: 14px; height: 14px;
+      transition: transform 0.3s ease;
+    }
+    .port-card:hover .port-cta svg { transform: translateX(4px); }
+    .port-number {
+      position: absolute; bottom: 0; right: 20px;
+      font-size: 80px; font-weight: 800; line-height: 0.7;
+      color: rgba(255,255,255,0.02);
+      font-family: var(--font-serif);
+      pointer-events: none; z-index: 1;
+    }
+
+    .portfolio-cta {
+      text-align: center; margin-top: 64px; position: relative; z-index: 2;
+    }
+    .portfolio-cta-inner {
+      display: inline-flex; align-items: center; gap: 16px;
+      padding: 20px 32px; border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      flex-wrap: wrap; justify-content: center;
+    }
+    .portfolio-cta-inner p { color: rgba(255,255,255,0.6); font-size: 14px; }
+    .portfolio-cta-inner p strong { color: #fff; }
+
+    .portfolio-controls {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 48px; flex-wrap: wrap;
+    }
+    .port-filter {
+      padding: 8px 18px; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: var(--font-mono);
+      border-radius: 9999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.4);
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .port-filter:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.15); }
+    .port-filter.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Quiz — Interactive Diagnostic */
+    .section-diag {
+      position: relative; padding: 96px 0; background: var(--bg-alt); overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 500px;
+    }
+    .section-diag::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,77,166,0.04) 1px, transparent 1px);
+      background-size: 24px 24px; pointer-events: none;
+    }
+    .diag-header { text-align: center; margin-bottom: 48px; }
+
+    .quiz-wrap { max-width: 640px; margin: 0 auto; }
+    .quiz-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-xl);
+      padding: 40px 48px;
+      position: relative;
+    }
+    @media (max-width: 640px) { .quiz-card { padding: 28px 20px; } }
+
+    .quiz-progress {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 36px;
+    }
+    .quiz-progress .qp-step {
+      flex: 1; height: 4px; border-radius: 9999px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.4s ease;
+    }
+    .quiz-progress .qp-step.active { background: var(--primary); }
+    .quiz-progress .qp-step.done { background: var(--primary-light); }
+    .quiz-step-label {
+      font-size: 11px; font-family: var(--font-mono); letter-spacing: 0.04em;
+      color: var(--muted); margin-bottom: 24px; text-transform: uppercase;
+    }
+    .quiz-step-label strong { color: var(--primary); }
+
+    .quiz-step { display: none; animation: quizFade 0.4s ease; }
+    .quiz-step.active { display: block; }
+    @keyframes quizFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .quiz-step h3 {
+      font-family: var(--font-serif); font-size: clamp(22px,2.5vw,28px);
+      font-weight: 400; line-height: 1.15; margin-bottom: 4px;
+    }
+    .quiz-step .qs-hint { font-size: 13px; color: #888; margin-bottom: 28px; }
+
+    .quiz-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .quiz-options.single-col { grid-template-columns: 1fr; }
+    .quiz-option {
+      padding: 16px 20px; border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      cursor: pointer; transition: all 0.3s ease;
+      text-align: center; font-size: 14px; font-weight: 500;
+    }
+    .quiz-option:hover { border-color: rgba(255,77,166,0.2); background: rgba(255,77,166,0.04); }
+    .quiz-option.selected { border-color: var(--primary); background: rgba(255,77,166,0.08); color: var(--primary); box-shadow: 0 0 20px rgba(255,77,166,0.05); }
+    .quiz-option .qo-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+    .quiz-option .qo-sub { font-size: 11px; color: #666; font-weight: 400; margin-top: 2px; }
+
+    .quiz-field {
+      width: 100%; padding: 14px 18px; font-size: 14px; font-family: var(--font-sans);
+      color: #e8e8e8; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius);
+      background: rgba(255,255,255,0.04); outline: none; transition: border-color 0.2s;
+    }
+    .quiz-field:focus { border-color: var(--primary); }
+    .quiz-field::placeholder { color: #555; }
+    .quiz-field-group { margin-bottom: 14px; }
+    .quiz-field-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #aaa; }
+
+    .quiz-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 32px; gap: 12px;
+    }
+    .quiz-btn {
+      padding: 12px 28px; border-radius: 9999px; font-size: 14px; font-weight: 600;
+      border: 0; cursor: pointer; transition: all 0.3s ease;
+    }
+    .quiz-btn-back {
+      background: rgba(255,255,255,0.04); color: #888;
+    }
+    .quiz-btn-back:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .quiz-btn-next {
+      background: var(--primary); color: #fff;
+      box-shadow: 0 4px 16px rgba(255,77,166,0.2);
+    }
+    .quiz-btn-next:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .quiz-btn-next:disabled { opacity: 0.4; cursor: default; transform: none; }
+    .quiz-btn-full { width: 100%; justify-content: center; }
+
+    .quiz-whatsapp {
+      display: flex; align-items: center; gap: 12px;
+      padding: 20px; margin-top: 20px;
+      border-radius: var(--radius-lg);
+      background: rgba(37,211,102,0.08);
+      border: 1px solid rgba(37,211,102,0.15);
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .quiz-whatsapp:hover { background: rgba(37,211,102,0.12); }
+    .quiz-whatsapp svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .quiz-whatsapp p { font-size: 13px; color: #ddd; }
+    .quiz-whatsapp p strong { color: #25D366; }
+
+    /* GSAP Transition Gallery */
+    .section-transition {
+      position: relative; height: 70vh; min-height: 400px;
+      overflow: hidden; background: #050505;
+      content-visibility: auto; contain-intrinsic-size: auto 400px;
+    }
+    .transition-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+    }
+    .transition-slide.active { opacity: 1; }
+    .transition-slide { background-size: cover; background-position: center; will-change: opacity; }
+    .transition-slide::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(5,5,5,0.6) 0%, transparent 40%, transparent 60%, rgba(5,5,5,0.6) 100%);
+    }
+    .transition-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; text-align: center; padding: 48px;
+    }
+    .transition-overlay h2 {
+      font-family: var(--font-serif); font-size: clamp(28px,4vw,48px);
+      color: #fff; font-weight: 400; line-height: 1.1;
+      max-width: 600px; opacity: 0; transform: translateY(30px);
+    }
+    .transition-overlay h2 .accent { color: var(--primary); font-style: italic; }
+    .transition-indicators {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 3;
+    }
+    .transition-indicators .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .transition-indicators .dot.active { width: 28px; border-radius: 9999px; background: var(--primary); }
+
+    /* Cases */
+    .section-cases {
+      position: relative; padding: 96px 0; background: #0a0a0a; overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 500px;
+    }
+    .cases-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .cases-tabs button {
+      padding: 8px 16px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: var(--font-mono); border-radius: 9999px; border: 1px solid var(--line);
+      background: transparent; color: var(--muted); transition: all 0.2s;
+    }
+    .cases-tabs button:hover { border-color: var(--muted); color: #fff; }
+    .cases-tabs button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .cases-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+    @media (min-width: 1024px) { .cases-grid { grid-template-columns: 3fr 2fr; } }
+    .case-media {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid var(--line); aspect-ratio: 16/10;
+      display: flex; align-items: center; justify-content: center; background: var(--bg-alt);
+    }
+    .case-media-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .case-metric { padding: 16px; border-radius: var(--radius); border: 1px solid var(--line); background: rgba(255,255,255,0.03); }
+    .case-metric .mt { font-size: 11px; color: #999; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+    .case-metric .mv { font-size: 18px; font-weight: 700; color: #e8e8e8; }
+    .case-quote {
+      position: relative; padding: 20px 24px; border-radius: var(--radius);
+      background: var(--bg-alt); border: 1px solid var(--line);
+    }
+    .case-quote q { color: #d0d0d0; }
+    .case-quote q { font-size: 14px; font-style: italic; line-height: 1.6; }
+    .case-quote .author { margin-top: 12px; font-size: 13px; font-weight: 500; }
+    .case-quote .author .role { color: #888; font-weight: 400; }
+    .case-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 40px; }
+    .case-dots { display: flex; gap: 8px; }
+    .case-dots button {
+      width: 8px; height: 8px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.15);
+      cursor: pointer; transition: all 0.3s;
+    }
+    .case-dots button.active { width: 32px; border-radius: 9999px; background: var(--primary); }
+    .case-next { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--primary); border: 0; background: none; cursor: pointer; }
+    .upload-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; font-size: 11px; border-radius: 9999px;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+      color: #999; cursor: pointer; transition: all 0.2s;
+    }
+    .upload-btn:hover { color: #fff; border-color: var(--muted); }
+
+    /* Solutions */
+    .section-solutions {
+      position: relative; padding: 96px 0; background: var(--bg-alt); overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 500px;
+    }
+    .section-solutions::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 4rem 4rem; pointer-events: none;
+    }
+    .solutions-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 768px) { .solutions-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+    .sol-card {
+      padding: 28px 32px; border-radius: var(--radius-lg); background: #0f0f0f;
+      border: 1px solid var(--line); transition: all 0.3s;
+    }
+    .sol-card:hover { border-color: rgba(255,77,166,0.2); box-shadow: 0 8px 32px rgba(255,77,166,0.03); transform: translateY(-2px); }
+    .sol-card-inner { display: flex; gap: 16px; align-items: flex-start; }
+    .sol-icon {
+      width: 48px; height: 48px; border-radius: var(--radius); display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .sol-body { flex: 1; min-width: 0; }
+    .sol-title { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .sol-title h3 { font-size: 17px; font-weight: 600; }
+    .sol-title .badge {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 9999px; background: rgba(255,77,166,0.05);
+      color: var(--primary); border: 1px solid rgba(255,77,166,0.1); white-space: nowrap;
+    }
+    .sol-body > p { font-size: 14px; color: #aaa; line-height: 1.7; margin-bottom: 16px; }
+    .sol-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .sol-skills span {
+      padding: 4px 10px; font-size: 10px; font-family: var(--font-mono);
+      border-radius: 9999px; background: rgba(255,255,255,0.04); color: #aaa; border: 1px solid var(--line);
+    }
+    .sol-metric { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; font-family: var(--font-mono); }
+
+    /* Marketplace */
+    .section-market {
+      position: relative; padding: 96px 0; background: #0a0a0a; overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 500px;
+    }
+    .market-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .market-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .market-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (min-width: 1280px) { .market-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+    .mod-card {
+      position: relative; padding: 20px 24px; border-radius: var(--radius-lg);
+      border: 1px solid var(--line); cursor: pointer; transition: all 0.3s; background: #0f0f0f;
+    }
+    .mod-card:hover { border-color: var(--muted); }
+    .mod-card.active { border-color: rgba(255,77,166,0.3); box-shadow: 0 8px 24px rgba(255,77,166,0.03); transform: translateY(-2px); }
+    .mod-popular {
+      position: absolute; top: 12px; right: 12px; padding: 2px 8px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: var(--font-mono); border-radius: 9999px; background: var(--primary); color: #fff;
+    }
+    .mod-icon {
+      width: 40px; height: 40px; border-radius: var(--radius); display: flex;
+      align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .mod-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .mod-card p { font-size: 13px; color: #aaa; line-height: 1.6; margin-bottom: 16px; }
+    .mod-status { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; }
+    .mod-status .arrow { color: var(--muted); transition: all 0.2s; }
+    .mod-card.active .mod-status .arrow { color: var(--primary); transform: translateX(4px); }
+    .market-cta { margin-top: 48px; text-align: center; }
+    .market-cta-inner {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 16px;
+      padding: 24px 32px; border-radius: var(--radius-lg); background: #0f0f0f; border: 1px solid var(--line);
+    }
+    @media (min-width: 640px) { .market-cta-inner { flex-direction: row; } }
+
+    /* ROI */
+    .section-roi {
+      position: relative; padding: 96px 0; background: #0a0a0a; overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 500px;
+    }
+    .roi-glow { position: absolute; top: 0; right: 0; width: 384px; height: 384px; background: linear-gradient(225deg, rgba(255,77,166,0.04), transparent); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .roi-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) { .roi-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+    .roi-slider-group { margin-bottom: 20px; }
+    .roi-slider-group label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+    .roi-slider-group label .icon { color: #888; width: 14px; height: 14px; }
+    .roi-slider-row { display: flex; align-items: center; gap: 12px; }
+    .roi-slider-row input[type="range"] {
+      flex: 1; height: 8px; border-radius: 9999px; appearance: none;
+      background: rgba(255,255,255,0.1); outline: none;
+    }
+    .roi-slider-row input[type="range"]::-webkit-slider-thumb {
+      appearance: none; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--primary); cursor: pointer; box-shadow: 0 2px 8px rgba(255,77,166,0.3);
+    }
+    .roi-slider-row input[type="range"]::-moz-range-thumb {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--primary); cursor: pointer; border: 0;
+    }
+    .roi-slider-row .val { font-size: 13px; font-weight: 600; font-family: var(--font-mono); min-width: 64px; text-align: right; }
+    .roi-result-box { padding: 32px; }
+    .roi-result-main { text-align: center; margin-bottom: 32px; }
+    .roi-result-main .big-num { font-size: clamp(28px,3vw,40px); font-weight: 700; }
+    .roi-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .roi-metric {
+      padding: 16px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+    .roi-metric .rm-value { font-size: 17px; font-weight: 700; color: #e8e8e8; }
+    .roi-metric .rm-label { font-size: 11px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+    .roi-metric .rm-value { font-size: 17px; font-weight: 700; }
+    .roi-metric .rm-sub { font-size: 9px; color: var(--muted); }
+    .roi-empty {
+      display: flex; align-items: center; justify-content: center; min-height: 100%;
+    }
+    .roi-empty-inner { text-align: center; padding: 64px 32px; }
+    .roi-empty-icon { width: 64px; height: 64px; margin: 0 auto 16px; border-radius: var(--radius-lg); background: #0f0f0f; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: #888; }
+    .roi-empty p { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .roi-empty .hint { font-size: 13px; color: #888; max-width: 280px; margin: 0 auto; }
+
+    /* Roadmap */
+    .section-roadmap {
+      position: relative; padding: 96px 0; background: #0a0a0a; overflow: hidden;
+      content-visibility: auto; contain-intrinsic-size: auto 500px;
+    }
+    .timeline { position: relative; }
+    .timeline-line { position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.08); }
+    @media (min-width: 768px) { .timeline-line { left: 50%; transform: translateX(-1px); } }
+    .timeline-step {
+      position: relative; display: flex; flex-direction: column; gap: 24px; align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    @media (min-width: 768px) { .timeline-step { flex-direction: row; gap: 32px; } }
+    .step-dot {
+      position: absolute; left: 12px; width: 12px; height: 12px; border-radius: 50%;
+      background: #fff; border: 2px solid; transform: translateX(-50%); z-index: 10; margin-top: 24px;
+    }
+    @media (min-width: 768px) { .step-dot { left: 50%; } }
+    .step-card-wrap { width: 100%; padding-left: 48px; }
+    @media (min-width: 768px) { .step-card-wrap { width: calc(50% - 32px); padding-left: 0; } }
+    .step-card {
+      padding: 20px 24px; border-radius: var(--radius-lg); background: #0f0f0f;
+      border: 1px solid var(--line);
+    }
+    .step-card:hover { border-color: var(--muted); }
+    .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .step-icon {
+      width: 32px; height: 32px; border-radius: 8px; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-phase { font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--font-mono); }
+    .step-subtitle { font-size: 9px; color: #888; font-family: var(--font-mono); margin-left: 8px; }
+    .step-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .step-items { display: flex; flex-direction: column; gap: 6px; }
+    .step-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #aaa; }
+    .step-item .check { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
+    .step-spacer { display: none; }
+    @media (min-width: 768px) { .step-spacer { display: block; width: calc(50% - 32px); } }
+    .step-right .step-card-wrap { padding-left: 48px; }
+    @media (min-width: 768px) { .step-right .step-card-wrap { padding-left: 0; margin-left: auto; } }
+
+    /* Footer */
+    .site-footer {
+      position: relative; background: var(--secondary); color: #fff; overflow: hidden;
+    }
+    .footer-top-line {
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,77,166,0.3), transparent);
+    }
+    .footer-main { padding: 64px 0 80px; }
+    .footer-grid { display: flex; flex-direction: column; gap: 40px; }
+    @media (min-width: 768px) { .footer-grid { flex-direction: row; justify-content: space-between; } }
+    .footer-brand { max-width: 280px; }
+    .footer-brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-top: 12px; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (min-width: 640px) { .footer-links { grid-template-columns: 1fr 1fr 1fr; gap: 48px; } }
+    .footer-links h4 { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); font-family: var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-links ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 32px; }
+    .footer-bottom { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+    .footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .footer-social { display: flex; align-items: center; gap: 8px; }
+    .social-btn {
+      width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+    }
+    .social-btn:hover { background: rgba(255,77,166,0.2); }
+    .footer-divider-sm { width: 1px; height: 24px; background: rgba(255,255,255,0.08); }
+    .footer-credit {
+      border-top: 1px solid rgba(255,255,255,0.04); padding: 16px 0; text-align: center;
+    }
+    .footer-credit p { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 640px) {
+      .form-row-2 { grid-template-columns: 1fr; }
+      .market-cta-inner { text-align: center; }
+      .roi-metrics { grid-template-columns: 1fr; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    /* Typography transitions */
+    .section-title, .sol-title h3, .mod-card h3, .step-card h3, .port-content h3 {
+      transition: letter-spacing 0.38s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s ease;
+    }
+    .section-title:hover, .sol-card:hover .sol-title h3, .mod-card:hover h3, .step-card:hover h3, .port-card:hover .port-content h3 {
+      letter-spacing: 0.008em;
+    }
+    .section-label {
+      transition: letter-spacing 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .section-label:hover {
+      letter-spacing: 0.12em;
+      background: rgba(255,77,166,0.1);
+      box-shadow: 0 0 20px rgba(255,77,166,0.05);
+    }
+    .port-card .port-cta { transition: gap 0.3s ease, letter-spacing 0.3s ease; }
+    .port-card:hover .port-cta { gap: 12px; letter-spacing: 0.02em; }
+    .case-quote q { color: #d0d0d0; transition: color 0.3s ease; }
+    .case-quote:hover q { color: #f0f0f0; }
+    .sol-card { transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .sol-card:hover .sol-icon { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="pl-logo"><video src="assets/imagens/logo/__project_AI_TO_FLOW_Log.mp4" autoplay loop muted playsinline></video></div>
+    <div class="pl-bar"><div class="pl-bar-fill"></div></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <div class="container-wide header-inner">
+      <a href="#" class="header-logo">
+        <video src="assets/imagens/logo/__project_AI_TO_FLOW_Log.mp4" autoplay loop muted playsinline style="width:32px;height:32px;border-radius:8px;object-fit:cover"></video>
+        <div class="logo-text">
+          <span class="name">Alto Flow</span>
+          <span class="sub">OS</span>
+        </div>
+      </a>
+      <nav class="header-nav">
+        <a href="#portfolio">Portfólio</a>
+        <a href="#diagnostic">Diagnóstico</a>
+        <a href="#cases">Cases</a>
+        <a href="#solutions">Soluções</a>
+        <a href="#marketplace">Módulos</a>
+        <a href="#roi">ROI</a>
+      </nav>
+      <div class="header-actions">
+        <div class="header-cta"><a href="#diagnostic">Diagnóstico Gratuito</a></div>
+        <button class="menu-btn" id="menu-toggle" aria-label="Abrir menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <div class="mobile-nav-inner">
+        <a href="#portfolio">Portfólio</a>
+        <a href="#diagnostic">Diagnóstico</a>
+        <a href="#cases">Cases</a>
+        <a href="#solutions">Soluções</a>
+        <a href="#marketplace">Módulos</a>
+        <a href="#roi">ROI</a>
+        <a href="#diagnostic" class="mobile-cta">Diagnóstico Gratuito</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="hero-glow-tl"></div>
+    <div class="hero-glow-br"></div>
+    <div class="hero-grid"></div>
+    <div class="container-wide hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4DA6" stroke-width="2"><path d="M12 2l2 7h7l-5 5 2 7-6-4-6 4 2-7-5-5h7z"/></svg>
+        <span>Sistema de Automação Inteligente</span>
+      </div>
+      <h1>Transforme seu negócio<br /><span class="accent">em uma máquina de vendas.</span></h1>
+      <p>Alto Flow OS é o sistema que integra captação de leads, atendimento automatizado e marketing inteligente — tudo em um só lugar para sua empresa crescer sem complicação.</p>
+      <div class="hero-btns">
+        <a href="#diagnostic" class="btn-primary">Fazer Diagnóstico Gratuito
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#portfolio" class="btn-outline">Ver Portfólio
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat"><span class="num" data-target="80">0%</span><span class="lbl">Automação</span></div>
+        <div class="stat"><span class="num" data-target="5">0s</span><span class="lbl">Resposta ao cliente</span></div>
+        <div class="stat"><span class="num" data-target="20">0%</span><span class="lbl">Mais conversão</span></div>
+        <div class="stat"><span class="num" data-target="70">0%</span><span class="lbl">Retenção</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GSAP Transition Gallery -->
+  <section class="section-transition" id="transition-gallery">
+    <div class="transition-slide active" style="background-image:url('assets/imagens/imobiliaria-premium.webp')"></div>
+    <div class="transition-slide" style="background-image:url('assets/imagens/estudio-criativo.webp')"></div>
+    <div class="transition-slide" style="background-image:url('assets/imagens/oficina-inteligente.webp')"></div>
+    <div class="transition-overlay">
+      <h2 id="transition-text">Transforme seu negócio<br /><span class="accent">com resultados que inspiram.</span></h2>
+    </div>
+    <div class="transition-indicators">
+      <div class="dot active" onclick="goTransition(0)"></div>
+      <div class="dot" onclick="goTransition(1)"></div>
+      <div class="dot" onclick="goTransition(2)"></div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="section-portfolio" id="portfolio">
+    <div class="container-wide">
+      <div class="portfolio-header fade-in">
+        <span class="section-label">Portfólio</span>
+        <h2 class="section-title">Projetos que transformam<br /><span class="text-primary" style="font-style:italic">resultados em realidade.</span></h2>
+        <p class="section-desc">Conheça soluções criadas para impulsionar vendas, agendamentos e presença digital de negócios como o seu.</p>
+      </div>
+      <div class="portfolio-controls fade-in fade-in-delay-1">
+        <button class="port-filter active" data-filter="all">Todos</button>
+        <button class="port-filter" data-filter="Imobiliário">Imobiliário</button>
+        <button class="port-filter" data-filter="Design">Design</button>
+        <button class="port-filter" data-filter="Automotivo">Automotivo</button>
+        <button class="port-filter" data-filter="Saúde">Saúde</button>
+        <button class="port-filter" data-filter="Gastronomia">Gastronomia</button>
+      </div>
+      <div class="portfolio-grid fade-in fade-in-delay-2" id="portfolio-grid"></div>
+      <div class="portfolio-cta fade-in fade-in-delay-3">
+        <div class="portfolio-cta-inner">
+          <video src="assets/imagens/logo/__project_AI_TO_FLOW_Log.mp4" autoplay loop muted playsinline style="width:28px;height:28px;border-radius:6px;object-fit:cover"></video>
+          <p>Quer um projeto personalizado para o <strong>seu negócio?</strong></p>
+          <a href="#diagnostic" class="btn-primary" style="white-space:nowrap">Solicitar Diagnóstico
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diagnostic — Interactive Quiz -->
+  <section class="section-diag" id="diagnostic">
+    <div class="container-wide">
+      <div class="diag-header fade-in">
+        <span class="section-label">Diagnóstico</span>
+        <h2 class="section-title">Descubra o potencial<br /><span class="text-primary" style="font-style:italic">do seu negócio.</span></h2>
+        <p class="section-desc" style="margin:0 auto">Responda 3 perguntas rápidas e receba um orçamento personalizado no WhatsApp.</p>
+      </div>
+      <div class="quiz-wrap fade-in fade-in-delay-1" id="quiz-wrap">
+        <div class="quiz-card" id="quiz-card">
+
+          <!-- Progress bar -->
+          <div class="quiz-progress" id="quiz-progress">
+            <div class="qp-step active"></div>
+            <div class="qp-step"></div>
+            <div class="qp-step"></div>
+          </div>
+          <div class="quiz-step-label">Passo <strong id="quiz-current">1</strong> <span id="quiz-of">de 3</span></div>
+
+          <!-- Step 1: Segment -->
+          <div class="quiz-step active" data-step="1">
+            <h3>Qual seu segmento?</h3>
+            <p class="qs-hint">Selecione a área que melhor descreve seu negócio.</p>
+            <div class="quiz-options" id="q-segment">
+              <div class="quiz-option" data-value="Restaurante" onclick="selectQuiz(this,'q-segment')"><span class="qo-icon">🍽️</span>Restaurante<span class="qo-sub">Gastronomia</span></div>
+              <div class="quiz-option" data-value="Clínica" onclick="selectQuiz(this,'q-segment')"><span class="qo-icon">🏥</span>Clínica / Saúde<span class="qo-sub">Odontologia, Fisioterapia</span></div>
+              <div class="quiz-option" data-value="Imobiliária" onclick="selectQuiz(this,'q-segment')"><span class="qo-icon">🏠</span>Imobiliária<span class="qo-sub">Corretagem, Aluguéis</span></div>
+              <div class="quiz-option" data-value="E-commerce" onclick="selectQuiz(this,'q-segment')"><span class="qo-icon">🛒</span>E-commerce<span class="qo-sub">Loja Virtual</span></div>
+              <div class="quiz-option" data-value="Serviços" onclick="selectQuiz(this,'q-segment')"><span class="qo-icon">🔧</span>Serviços<span class="qo-sub">Advocacia, Contabilidade</span></div>
+              <div class="quiz-option" data-value="Outro" onclick="selectQuiz(this,'q-segment')"><span class="qo-icon">💼</span>Outro<span class="qo-sub">Informe no WhatsApp</span></div>
+            </div>
+            <div class="quiz-nav">
+              <span></span>
+              <button class="quiz-btn quiz-btn-next" id="q-next-1" onclick="nextStep(2)" disabled>Avançar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Step 2: Challenge -->
+          <div class="quiz-step" data-step="2">
+            <h3>Qual seu maior desafio?</h3>
+            <p class="qs-hint">O que mais impacta o crescimento do seu negócio hoje?</p>
+            <div class="quiz-options" id="q-challenge">
+              <div class="quiz-option" data-value="Poucos Clientes" onclick="selectQuiz(this,'q-challenge')"><span class="qo-icon">📉</span>Poucos Clientes<span class="qo-sub">Falta de captação de leads</span></div>
+              <div class="quiz-option" data-value="Atendimento Lento" onclick="selectQuiz(this,'q-challenge')"><span class="qo-icon">⏰</span>Atendimento Lento<span class="qo-sub">Demora para responder clientes</span></div>
+              <div class="quiz-option" data-value="Baixa Conversão" onclick="selectQuiz(this,'q-challenge')"><span class="qo-icon">💸</span>Baixa Conversão<span class="qo-sub">Clientes pedem orçamento mas não fecham</span></div>
+              <div class="quiz-option" data-value="Marketing Fraco" onclick="selectQuiz(this,'q-challenge')"><span class="qo-icon">📢</span>Marketing Fraco<span class="qo-sub">Dificuldade em divulgar</span></div>
+            </div>
+            <div class="quiz-nav">
+              <button class="quiz-btn quiz-btn-back" onclick="prevStep(1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Voltar</button>
+              <button class="quiz-btn quiz-btn-next" id="q-next-2" onclick="nextStep(3)" disabled>Avançar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Step 3: Contact -->
+          <div class="quiz-step" data-step="3">
+            <h3>Qual seu contato?</h3>
+            <p class="qs-hint">Deixe seus dados para receber o orçamento personalizado.</p>
+            <div class="quiz-field-group">
+              <label for="q-name">Nome</label>
+              <input class="quiz-field" id="q-name" type="text" placeholder="Seu nome" oninput="checkContact()" />
+            </div>
+            <div class="quiz-field-group">
+              <label for="q-phone">WhatsApp</label>
+              <input class="quiz-field" id="q-phone" type="tel" placeholder="(11) 99999-9999" oninput="checkContact()" />
+            </div>
+            <div class="quiz-nav">
+              <button class="quiz-btn quiz-btn-back" onclick="prevStep(2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Voltar</button>
+              <button class="quiz-btn quiz-btn-next" id="q-next-3" onclick="showQuizDone()">Concluir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px"><polyline points="20 6 9 17 4 12"/></svg></button>
+            </div>
+          </div>
+
+          <!-- WhatsApp CTA (shown after all steps) -->
+          <div class="quiz-step" data-step="done" id="quiz-done">
+            <h3 style="text-align:center">Pronto! 🎉</h3>
+            <p class="qs-hint" style="text-align:center">Seu diagnóstico está completo. Clique no botão abaixo para receber uma análise personalizada e orçamento no WhatsApp.</p>
+            <div class="quiz-whatsapp" id="quiz-whatsapp-btn" onclick="sendToWhatsApp()">
+              <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <div>
+                <p style="font-size:15px;font-weight:600;color:#fff">Enviar para WhatsApp</p>
+                <p style="font-size:12px;color:#999">Receba seu orçamento personalizado em até 5 minutos</p>
+              </div>
+            </div>
+            <div style="text-align:center;margin-top:20px">
+              <button class="quiz-btn quiz-btn-back" onclick="resetQuiz()">Refazer Diagnóstico</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases -->
+  <section class="section-cases" id="cases">
+    <div class="container-wide">
+      <div class="fade-in">
+        <span class="section-label">Cases</span>
+        <h2 class="section-title">Resultados reais,<br /><span class="text-primary" style="font-style:italic">clientes satisfeitos.</span></h2>
+        <p class="section-desc">Veja como empresas como a sua estão conquistando mais clientes e aumentando vendas com o Alto Flow OS.</p>
+      </div>
+      <div class="cases-tabs fade-in fade-in-delay-1" id="cases-tabs"></div>
+      <div class="cases-grid fade-in fade-in-delay-2" id="cases-grid">
+        <div class="case-media" id="case-media">
+          <div class="case-media-inner" id="case-media-inner">
+            <div class="upload-btn" style="cursor:default">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              Selecione um case
+            </div>
+          </div>
+        </div>
+        <div id="case-content"></div>
+      </div>
+      <div class="case-nav fade-in fade-in-delay-3" id="case-nav">
+        <div class="case-dots" id="case-dots"></div>
+        <button class="case-next" id="case-next">
+          Próximo case
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions -->
+  <section class="section-solutions" id="solutions">
+    <div class="container-wide">
+      <div class="fade-in">
+        <span class="section-label">Agentes FireBuff</span>
+        <h2 class="section-title">Quatro inteligências.<br /><span class="text-primary" style="font-style:italic">Um sistema completo.</span></h2>
+        <p class="section-desc">Cada agente FireBuff é especialista em uma área do seu negócio. Juntos, formam a solução mais completa para empresas que querem crescer.</p>
+      </div>
+      <div class="solutions-grid fade-in fade-in-delay-1" id="solutions-grid"></div>
+      <div class="market-cta fade-in fade-in-delay-2">
+        <a href="#marketplace" class="btn-primary">Explorar Módulos Disponíveis
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace -->
+  <section class="section-market" id="marketplace">
+    <div class="container-wide">
+      <div class="fade-in">
+        <span class="section-label">Módulos</span>
+        <h2 class="section-title">Soluções especializadas<br /><span class="text-primary" style="font-style:italic">para cada segmento.</span></h2>
+        <p class="section-desc">Escolha o módulo ideal para seu negócio. Cada um já vem configurado com automações e integrações específicas do seu setor.</p>
+      </div>
+      <div class="market-grid fade-in fade-in-delay-1" id="market-grid"></div>
+      <div class="market-cta fade-in fade-in-delay-2">
+        <div class="market-cta-inner">
+          <div>
+            <p style="font-size:14px;font-weight:600">Não encontrou seu segmento?</p>
+            <p style="font-size:12px;color:var(--muted)">Criamos uma solução personalizada para seu negócio.</p>
+          </div>
+          <a href="#roi" class="btn-primary" style="white-space:nowrap">Simular ROI Personalizado
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="section-roi" id="roi">
+    <div class="roi-glow"></div>
+    <div class="container-wide">
+      <div class="fade-in">
+        <span class="section-label">Calculadora ROI</span>
+        <h2 class="section-title">Quanto seu negócio<br /><span class="text-primary" style="font-style:italic">pode ganhar com automação?</span></h2>
+        <p class="section-desc">Simule o impacto financeiro do Alto Flow OS no seu negócio com base em resultados reais de clientes.</p>
+      </div>
+      <div class="roi-grid fade-in fade-in-delay-1">
+        <div class="form-glass" style="padding:24px 32px">
+          <h3 style="font-size:13px;font-weight:600;font-family:var(--font-mono);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:20px">Seus dados</h3>
+          <div class="roi-slider-group">
+            <label>
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Leads mensais
+            </label>
+            <div class="roi-slider-row">
+              <input type="range" min="10" max="5000" value="200" oninput="updateROI()" id="roi-leads" />
+              <span class="val" id="roi-leads-val">200</span>
+            </div>
+          </div>
+          <div class="roi-slider-group">
+            <label>
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Ticket médio (R$)
+            </label>
+            <div class="roi-slider-row">
+              <input type="range" min="20" max="10000" step="10" value="150" oninput="updateROI()" id="roi-ticket" />
+              <span class="val" id="roi-ticket-val">R$ 150</span>
+            </div>
+          </div>
+          <div class="roi-slider-group">
+            <label>
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              Taxa de conversão atual (%)
+            </label>
+            <div class="roi-slider-row">
+              <input type="range" min="0.5" max="30" step="0.5" value="5" oninput="updateROI()" id="roi-conv" />
+              <span class="val" id="roi-conv-val">5%</span>
+            </div>
+          </div>
+          <div class="roi-slider-group">
+            <label>
+              <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Funcionários no comercial
+            </label>
+            <div class="roi-slider-row">
+              <input type="range" min="1" max="50" value="3" oninput="updateROI()" id="roi-employees" />
+              <span class="val" id="roi-employees-val">3</span>
+            </div>
+          </div>
+          <button onclick="showROIResult()" class="btn-primary" style="width:100%;justify-content:center;margin-top:8px">
+            Calcular ROI
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </button>
+        </div>
+        <div id="roi-result">
+          <div class="roi-empty">
+            <div class="roi-empty-inner">
+              <div class="roi-empty-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <p>Ajuste os parâmetros ao lado</p>
+              <p class="hint">Preencha seus dados e clique em "Calcular ROI" para ver o impacto estimado no seu negócio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="section-roadmap" id="roadmap">
+    <div class="container-wide">
+      <div class="fade-in">
+        <span class="section-label">Jornada</span>
+        <h2 class="section-title">Sua transformação<br /><span class="text-primary" style="font-style:italic">em 8 semanas.</span></h2>
+        <p class="section-desc">Implementação estruturada e progressiva. Cada fase prepara o terreno para a próxima, garantindo resultados consistentes.</p>
+      </div>
+      <div class="timeline fade-in fade-in-delay-1" id="timeline"></div>
+      <div class="market-cta fade-in fade-in-delay-2" style="margin-top:64px">
+        <div class="market-cta-inner">
+          <video src="assets/imagens/logo/__project_AI_TO_FLOW_Log.mp4" autoplay loop muted playsinline style="width:20px;height:20px;border-radius:4px;object-fit:cover"></video>
+          <div>
+            <p style="font-size:14px;font-weight:600">Pronto para começar sua transformação?</p>
+            <p style="font-size:12px;color:var(--muted)">Primeira semana de diagnóstico é gratuita.</p>
+          </div>
+          <a href="#diagnostic" class="btn-primary" style="white-space:nowrap">Iniciar Diagnóstico Gratuito
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top-line"></div>
+    <div class="container-wide footer-main">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" style="display:flex;align-items:center;gap:10px">
+            <video src="assets/imagens/logo/__project_AI_TO_FLOW_Log.mp4" autoplay loop muted playsinline style="width:32px;height:32px;border-radius:8px;object-fit:cover"></video>
+            <div style="display:flex;flex-direction:column;line-height:1.1">
+              <span style="font-size:14px;font-weight:600;letter-spacing:-0.01em;color:#fff">Alto Flow</span>
+              <span style="font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.5);margin-top:-2px">OS</span>
+            </div>
+          </a>
+          <p>Transformando negócios com automação inteligente. Mais clientes, mais vendas, mais resultados.</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h4>Produto</h4>
+            <ul>
+              <li><a href="#diagnostic">Diagnóstico</a></li>
+              <li><a href="#solutions">Soluções</a></li>
+              <li><a href="#marketplace">Módulos</a></li>
+              <li><a href="#roi">Calculadora ROI</a></li>
+              <li><a href="#portfolio">Portfólio</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Empresa</h4>
+            <ul>
+              <li><a href="#">Sobre</a></li>
+              <li><a href="#cases">Cases</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Carreiras</a></li>
+              <li><a href="#">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacidade</a></li>
+              <li><a href="#">Termos</a></li>
+              <li><a href="#">LGPD</a></li>
+              <li><a href="#">Segurança</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Alto Flow OS. Todos os direitos reservados.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="X (Twitter)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46L20 4"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <div class="footer-divider-sm"></div>
+          <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="social-btn" aria-label="Voltar ao topo">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-credit">
+      <p>Feito com <span style="color:var(--primary)">♥</span> pela Alto Flow OS</p>
+    </div>
+  </footer>
+
+  <script>
+    const PORTFOLIO = [
+      { order: 1, title: "Imobiliária Premium", category: "Mercado Imobiliário", filter: "Imobiliário",
+        desc: "Experiência digital para imobiliárias de alto padrão com apresentação sofisticada de imóveis, agendamento online e visitas virtuais para acelerar negociações.",
+        color: "#FF4DA6" },
+      { order: 2, title: "Estúdio Criativo", category: "Branding e Design", filter: "Design",
+        desc: "Portfólio moderno para agências e estúdios criativos que desejam destacar projetos, fortalecer autoridade e gerar novas oportunidades comerciais.",
+        color: "#22C55E" },
+      { order: 3, title: "Oficina Inteligente", category: "Serviços Automotivos", filter: "Automotivo",
+        desc: "Sistema focado em captação de clientes, orçamento rápido via WhatsApp e apresentação profissional dos serviços oferecidos.",
+        color: "#3B82F6" },
+      { order: 4, title: "Personal Trainer", category: "Fitness e Bem-Estar", filter: "Saúde",
+        desc: "Página otimizada para aumentar matrículas, apresentar planos de treino e facilitar o agendamento de aulas experimentais.",
+        color: "#F59E0B" },
+      { order: 5, title: "Clínica Odontológica", category: "Saúde", filter: "Saúde",
+        desc: "Experiência digital voltada para gerar confiança, apresentar tratamentos e aumentar o número de avaliações agendadas.",
+        color: "#8B5CF6" },
+      { order: 6, title: "Restaurante Premium", category: "Gastronomia", filter: "Gastronomia",
+        desc: "Sistema de reservas online com cardápio digital elegante, fortalecimento da marca e aumento da ocupação das mesas.",
+        color: "#EC4899" }
+    ];
+
+    const SOLUTIONS = [
+      { title: "FireBuff SDR", role: "Vendas Inteligentes", color: "#FF4DA6",
+        desc: "Qualifica leads, faz contato automático e agenda reuniões via WhatsApp e Instagram. Nunca mais perca uma oportunidade.",
+        skills: ["Qualificação","Contato Automático","Agendamento","Follow Up"], metric: ">85% conversão" },
+      { title: "FireBuff Marketing", role: "Marketing Autônomo", color: "#22C55E",
+        desc: "Cria campanhas, textos persuasivos e anúncios de forma automática. Sua marca presente onde os clientes estão.",
+        skills: ["Criação de Conteúdo","Anúncios","SEO","Planejamento"], metric: "ROI 8:1" },
+      { title: "FireBuff Growth", role: "Crescimento", color: "#3B82F6",
+        desc: "Identifica gargalos, oportunidades de receita e estratégias de crescimento baseadas em dados reais do seu negócio.",
+        skills: ["Análise de Negócio","Estratégia","Otimização"], metric: "+40% receita" },
+      { title: "FireBuff UX", role: "Experiência do Cliente", color: "#F59E0B",
+        desc: "Analisa a jornada do cliente, identifica pontos de melhoria e otimiza cada etapa para aumentar conversões.",
+        skills: ["Análise de Experiência","Otimização","Conversão"], metric: "+32% conversão" }
+    ];
+
+    const MODULES = [
+      { title: "Restaurant", desc: "Gestão de reservas, cardápio digital, pedidos automatizados e fidelização de clientes.", color: "#FF4DA6", popular: true },
+      { title: "Delivery", desc: "Roteirização inteligente, tracking em tempo real e otimização de entregas.", color: "#22C55E", popular: false },
+      { title: "Clinic", desc: "Agendamento, prontuário digital, lembretes inteligentes e gestão de pacientes.", color: "#3B82F6", popular: true },
+      { title: "Real Estate", desc: "CRM imobiliário, tour virtual, scoring de leads e automação de visitas.", color: "#F59E0B", popular: false },
+      { title: "Law Firm", desc: "Gestão de processos, prazos automáticos, triagem de clientes e documentos.", color: "#8B5CF6", popular: false },
+      { title: "E-commerce", desc: "Automação de vendas, carrinho abandonado, recomendações e pós-venda.", color: "#EC4899", popular: true },
+      { title: "Local Business", desc: "Presença digital, avaliações, WhatsApp business e campanhas locais.", color: "#14B8A6", popular: false }
+    ];
+
+    const CASES = [
+      { title: "Ristorante Bella Vita", subtitle: "Restaurante · São Paulo, SP", industry: "Restaurante", color: "#22C55E",
+        metrics: { leads: "+340%", revenue: "R$ 180K/mês", time: "3 meses" },
+        quote: "O Alto Flow OS automatizou 90% do nosso follow-up de reservas. Nunca mais perdemos um cliente.",
+        author: "Marco Rossi", role: "Proprietário" },
+      { title: "Clínica Dra. Mendes", subtitle: "Saúde · Belo Horizonte, MG", industry: "Clínica", color: "#3B82F6",
+        metrics: { leads: "+280%", revenue: "R$ 250K/mês", time: "4 meses" },
+        quote: "Reduzimos o absenteísmo em 70% com o sistema de lembretes inteligentes da Alto Flow.",
+        author: "Dra. Juliana Mendes", role: "Diretora Médica" },
+      { title: "Imobiliária Prime", subtitle: "Imobiliária · Rio de Janeiro, RJ", industry: "Imobiliária", color: "#FF4DA6",
+        metrics: { leads: "+420%", revenue: "R$ 520K/mês", time: "5 meses" },
+        quote: "O sistema transformou nosso funil de vendas. Fechamos contratos 3x mais rápido.",
+        author: "Carlos Oliveira", role: "CEO" },
+      { title: "TechStore Brasil", subtitle: "E-commerce · Curitiba, PR", industry: "E-commerce", color: "#F59E0B",
+        metrics: { leads: "+560%", revenue: "R$ 1.2M/mês", time: "6 meses" },
+        quote: "Campanhas autônomas de marketing nos deram um retorno 8x maior no primeiro trimestre.",
+        author: "Ana Lucia Costa", role: "CMO" }
+    ];
+
+    const ROADMAP = [
+      { phase: "Fase 1", title: "Diagnóstico e Planejamento", sub: "Semana 1-2", color: "#FF4DA6",
+        items: ["Diagnóstico completo do seu negócio","Mapeamento de processos e gargalos","Definição de metas e indicadores","Plano de ação personalizado"] },
+      { phase: "Fase 2", title: "Configuração e Base", sub: "Semana 3-4", color: "#22C55E",
+        items: ["Configuração do ambiente Alto Flow OS","Integração com WhatsApp e Instagram","Ativação do sistema de gestão","Migração de dados existentes"] },
+      { phase: "Fase 3", title: "Agentes e Automações", sub: "Semana 5-6", color: "#3B82F6",
+        items: ["Ativação dos agentes FireBuff","Configuração dos processos de vendas","Automação de marketing multicanal","Treinamento dos agentes com dados do negócio"] },
+      { phase: "Fase 4", title: "Otimização e Crescimento", sub: "Semana 7-8", color: "#F59E0B",
+        items: ["Análise de primeiros resultados","Ajustes e otimizações","Expansão para novos canais","Ativação de módulos adicionais"] },
+      { phase: "Fase 5", title: "Operação Autônoma", sub: "Mês 3+", color: "#8B5CF6",
+        items: ["Operação assistida em piloto automático","Relatórios executivos semanais","Otimização contínua inteligente","Suporte dedicado e atualizações"] }
+    ];
+
+    function renderPortfolio(filter) {
+      const grid = document.getElementById('portfolio-grid');
+      if (!grid) return;
+      const filtered = filter === 'all' ? PORTFOLIO : PORTFOLIO.filter(p => p.filter === filter);
+      grid.innerHTML = filtered.map(p => {
+        const slug = p.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+        return `<div class="port-card" data-filter="${p.filter}">
+          <div class="port-glow"></div>
+          <div class="port-image">
+            <img src="assets/imagens/${slug}.webp" alt="${p.title}" width="640" height="400" loading="lazy" decoding="async" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:2" onload="var me=this;me.style.display='block';var pp=me.parentElement?.querySelector('.port-placeholder');if(pp)pp.style.display='none'" onerror="var me=this;var e=me.src.split('.').pop();if(e==='webp'){me.src='assets/imagens/${slug}.png'}else if(e==='png'){me.src='assets/imagens/${slug}.jpg'}else if(e==='jpg'){me.src='assets/imagens/${slug}.svg'}else{me.style.display='none';var pp2=me.parentElement?.querySelector('.port-placeholder');if(pp2)pp2.style.display='flex'}" />
+            <div class="port-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+              <span style="font-size:9px;font-family:var(--font-mono);letter-spacing:0.04em;text-transform:uppercase;opacity:0.5">Imagem</span>
+            </div>
+            <span class="port-category">${p.category}</span>
+            <div class="port-number" style="color:${p.color}08">${String(p.order).padStart(2,'0')}</div>
+          </div>
+          <div class="port-content">
+            <h3>${p.title}</h3>
+            <p>${p.desc}</p>
+            <span class="port-cta">
+              Solicitar Proposta
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    document.querySelectorAll('.port-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.port-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPortfolio(btn.dataset.filter);
+      });
+    });
+
+    function renderSolutions() {
+      const grid = document.getElementById('solutions-grid');
+      if (!grid) return;
+      grid.innerHTML = SOLUTIONS.map(s => `
+        <div class="sol-card">
+          <div class="sol-card-inner">
+            <div class="sol-icon" style="background:${s.color}12;color:${s.color}">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4m10-10h-4M6 12H2"/></svg>
+            </div>
+            <div class="sol-body">
+              <div class="sol-title">
+                <h3>${s.title}</h3>
+                <span class="badge">${s.role}</span>
+              </div>
+              <p>${s.desc}</p>
+              <div class="sol-skills">${s.skills.map(k => `<span>${k}</span>`).join('')}</div>
+              <div class="sol-metric" style="color:${s.color}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ${s.metric}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderMarketplace() {
+      const grid = document.getElementById('market-grid');
+      if (!grid) return;
+      grid.innerHTML = MODULES.map(m => `
+        <div class="mod-card" onmouseenter="this.classList.add('active')" onmouseleave="this.classList.remove('active')">
+          ${m.popular ? '<span class="mod-popular">Popular</span>' : ''}
+          <div class="mod-icon" style="background:${m.color}12;color:${m.color}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3>${m.title}</h3>
+          <p>${m.desc}</p>
+          <div class="mod-status">
+            <span style="display:inline-flex;align-items:center;gap:4px;color:${m.color}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Disponível
+            </span>
+            <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    let caseIdx = 0;
+    let caseMedia = { files: {}, types: {} };
+
+    function renderCases() {
+      const tabs = document.getElementById('cases-tabs');
+      if (!tabs) return;
+      tabs.innerHTML = CASES.map((c, i) =>
+        `<button class="${i === caseIdx ? 'active' : ''}" onclick="selectCase(${i})">${c.industry}</button>`
+      ).join('');
+      const dots = document.getElementById('case-dots');
+      if (dots) {
+        dots.innerHTML = CASES.map((_, i) =>
+          `<button class="${i === caseIdx ? 'active' : ''}" onclick="selectCase(${i})" aria-label="Case ${i+1}"></button>`
+        ).join('');
+      }
+      updateCase();
+    }
+
+    function selectCase(i) { caseIdx = i; renderCases(); }
+
+    function updateCase() {
+      const c = CASES[caseIdx];
+      const media = document.getElementById('case-media-inner');
+      if (!media) return;
+      const file = caseMedia.files[caseIdx];
+      if (file) {
+        const type = caseMedia.types[caseIdx];
+        const closeBtn = `<button onclick="clearMedia(${caseIdx})" style="position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.5);color:#fff;border:0;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10" aria-label="Remover mídia"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+        media.innerHTML = type === 'video'
+          ? `<video src="${file}" controls style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"></video>${closeBtn}`
+          : `<img src="${file}" alt="Case" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" />${closeBtn}`;
+      } else {
+        media.innerHTML = `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:64px;height:64px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;background:${c.color}20;color:${c.color}">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <div style="display:flex;gap:8px">
+              <label class="upload-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Imagem<input type="file" accept="image/*" style="display:none" onchange="uploadMedia(${caseIdx}, event)" /></label>
+              <label class="upload-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Vídeo<input type="file" accept="video/*" style="display:none" onchange="uploadMedia(${caseIdx}, event)" /></label>
+            </div>
+          </div>`;
+      }
+      const content = document.getElementById('case-content');
+      if (!content) return;
+      content.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:24px;justify-content:center">
+          <div><h3 style="font-size:clamp(20px,2vw,28px);font-weight:600;line-height:1.2;margin-bottom:4px">${c.title}</h3><p style="font-size:13px;color:var(--muted)">${c.subtitle}</p></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+            <div class="case-metric"><div class="mt">Leads</div><div class="mv" style="color:${c.color}">${c.metrics.leads}</div></div>
+            <div class="case-metric"><div class="mt">Receita</div><div class="mv">${c.metrics.revenue}</div></div>
+            <div class="case-metric"><div class="mt">Período</div><div class="mv">${c.metrics.time}</div></div>
+          </div>
+          <div class="case-quote"><q>${c.quote}</q><div class="author">${c.author} <span class="role">${c.role}</span></div></div>
+        </div>`;
+    }
+
+    function uploadMedia(idx, e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      caseMedia.files[idx] = URL.createObjectURL(file);
+      caseMedia.types[idx] = file.type.startsWith('video') ? 'video' : 'image';
+      if (idx === caseIdx) updateCase();
+      e.target.value = '';
+    }
+
+    function clearMedia(idx) {
+      if (caseMedia.files[idx]) URL.revokeObjectURL(caseMedia.files[idx]);
+      delete caseMedia.files[idx]; delete caseMedia.types[idx];
+      if (idx === caseIdx) updateCase();
+    }
+
+    document.getElementById('case-next')?.addEventListener('click', () => selectCase((caseIdx + 1) % CASES.length));
+
+    function renderRoadmap() {
+      const tl = document.getElementById('timeline');
+      if (!tl) return;
+      tl.innerHTML = ROADMAP.map((s, i) => {
+        const isLeft = i % 2 === 0;
+        return `<div class="timeline-step ${!isLeft ? 'step-right' : ''}">
+          <div class="step-dot" style="border-color:${s.color}"></div>
+          <div class="step-card-wrap">
+            <div class="step-card">
+              <div class="step-header">
+                <div class="step-icon" style="background:${s.color}12;color:${s.color}">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div><span class="step-phase" style="color:${s.color}">${s.phase}</span><span class="step-subtitle">${s.sub}</span></div>
+              </div>
+              <h3>${s.title}</h3>
+              <div class="step-items">${s.items.map(item => `<div class="step-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="${s.color}" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span>${item}</span></div>`).join('')}</div>
+            </div>
+          </div>
+          <div class="step-spacer"></div>
+        </div>`;
+      }).join('');
+    }
+
+    function updateROI() {
+      document.getElementById('roi-leads-val').textContent = Number(document.getElementById('roi-leads').value).toLocaleString();
+      document.getElementById('roi-ticket-val').textContent = 'R$ ' + Number(document.getElementById('roi-ticket').value).toLocaleString();
+      document.getElementById('roi-conv-val').textContent = document.getElementById('roi-conv').value + '%';
+      document.getElementById('roi-employees-val').textContent = document.getElementById('roi-employees').value;
+    }
+
+    function showROIResult() {
+      const leads = Number(document.getElementById('roi-leads').value);
+      const ticket = Number(document.getElementById('roi-ticket').value);
+      const conv = Number(document.getElementById('roi-conv').value);
+      const emps = Number(document.getElementById('roi-employees').value);
+      const currentRevenue = leads * (conv / 100) * ticket;
+      const projConv = Math.min(conv * 2.5, 100);
+      const projRevenue = leads * (projConv / 100) * ticket;
+      const monthlyGain = projRevenue - currentRevenue;
+      const annualGain = monthlyGain * 12;
+      const laborSavings = emps * 3500 * 0.4;
+      document.getElementById('roi-result').innerHTML = `
+        <div class="form-glass roi-result-box">
+          <h3 style="font-size:13px;font-weight:600;font-family:var(--font-mono);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:24px">Impacto Projetado</h3>
+          <div class="roi-result-main">
+            <div style="width:80px;height:80px;border-radius:50%;background:rgba(255,77,166,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FF4DA6" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <p style="font-size:11px;color:var(--muted);font-family:var(--font-mono);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:4px">Ganho mensal estimado</p>
+            <p class="big-num">R$ ${Math.round(monthlyGain).toLocaleString()}</p>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">${annualGain >= 1000000 ? 'R$ ' + (annualGain / 1000000).toFixed(1) + 'M/ano' : 'R$ ' + Math.round(annualGain).toLocaleString() + '/ano'}</p>
+          </div>
+          <div class="roi-metrics">
+            <div class="roi-metric"><div class="rm-label">Receita atual</div><div class="rm-value">R$ ${Math.round(currentRevenue).toLocaleString()}</div><div class="rm-sub">/mês</div></div>
+            <div class="roi-metric"><div class="rm-label">Receita projetada</div><div class="rm-value" style="color:var(--primary)">R$ ${Math.round(projRevenue).toLocaleString()}</div><div class="rm-sub">/mês</div></div>
+            <div class="roi-metric"><div class="rm-label">Conversão projetada</div><div class="rm-value">${projConv.toFixed(1)}%</div><div class="rm-sub" style="color:var(--primary)">+${((projConv / conv - 1) * 100).toFixed(0)}%</div></div>
+            <div class="roi-metric"><div class="rm-label">Economia trabalho</div><div class="rm-value">R$ ${Math.round(laborSavings).toLocaleString()}</div><div class="rm-sub">/mês em eficiência</div></div>
+          </div>
+          <div style="text-align:center;margin-top:24px">
+            <a href="#roadmap" class="btn-primary">Ver Jornada de Implementação<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>`;
+    }
+
+    /* ─── Quiz Functions ─── */
+    const QUIZ_WA_PHONE = '5511999999999'; // ← Substitua pelo seu número
+    let quizData = { segment: '', challenge: '', name: '', phone: '' };
+
+    function selectQuiz(el, groupId) {
+      document.querySelectorAll(`#${groupId} .quiz-option`).forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      const step = el.closest('.quiz-step');
+      const stepNum = step?.dataset.step;
+      if (stepNum === '1') { quizData.segment = el.dataset.value; document.getElementById('q-next-1').disabled = false; }
+      if (stepNum === '2') { quizData.challenge = el.dataset.value; document.getElementById('q-next-2').disabled = false; }
+    }
+
+    function nextStep(n) {
+      goToStep(n);
+    }
+
+    function prevStep(n) {
+      goToStep(n);
+    }
+
+    function goToStep(n) {
+      document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`.quiz-step[data-step="${n}"]`);
+      if (target) target.classList.add('active');
+
+      // Update progress
+      const dots = document.querySelectorAll('#quiz-progress .qp-step');
+      dots.forEach((d, i) => {
+        d.classList.remove('active', 'done');
+        if (i + 1 === n) d.classList.add('active');
+        else if (i + 1 < n) d.classList.add('done');
+      });
+      document.getElementById('quiz-current').textContent = n;
+
+      // Check if last step (contact) is filled
+      if (n === 3) checkContact();
+
+      // Scroll to quiz card
+      document.getElementById('quiz-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function checkContact() {
+      const name = document.getElementById('q-name').value.trim();
+      const phone = document.getElementById('q-phone').value.trim();
+      quizData.name = name;
+      quizData.phone = phone;
+    }
+
+    function sendToWhatsApp() {
+      const name = quizData.name || document.getElementById('q-name')?.value?.trim() || 'Não informado';
+      const phone = quizData.phone || document.getElementById('q-phone')?.value?.trim() || 'Não informado';
+      const segment = quizData.segment || 'Não informado';
+      const challenge = quizData.challenge || 'Não informado';
+
+      if (!phone || phone === 'Não informado' || phone.length < 8) {
+        goToStep(3);
+        document.getElementById('q-phone')?.focus();
+        document.getElementById('q-phone')?.style.setProperty('border-color', '#FF4DA6', 'important');
+        setTimeout(() => document.getElementById('q-phone')?.style.removeProperty('border-color'), 2000);
+        return;
+      }
+
+      const msg = encodeURIComponent(
+        `Olá! 👋\n\nAcabei de responder o diagnóstico da Alto Flow OS e quero um orçamento personalizado.\n\n📋 *Meus dados:*\n▪ Segmento: ${segment}\n▪ Desafio: ${challenge}\n▪ Nome: ${name}\n▪ WhatsApp: ${phone}\n\n*Quero saber como o Alto Flow OS pode ajudar meu negócio a crescer!* 🚀`
+      );
+      window.open(`https://wa.me/${QUIZ_WA_PHONE}?text=${msg}`, '_blank');
+    }
+
+    function showQuizDone() {
+      checkContact();
+      const name = quizData.name || '';
+      const phone = quizData.phone || '';
+      if (!name || !phone || phone.length < 8) {
+        document.getElementById('q-phone')?.focus();
+        document.getElementById('q-phone')?.style.setProperty('border-color', '#FF4DA6', 'important');
+        document.getElementById('q-name')?.style.setProperty('border-color', !name ? '#FF4DA6' : '', 'important');
+        setTimeout(() => {
+          document.getElementById('q-phone')?.style.removeProperty('border-color');
+          document.getElementById('q-name')?.style.removeProperty('border-color');
+        }, 2000);
+        return;
+      }
+      document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('quiz-done').classList.add('active');
+      const dots = document.querySelectorAll('#quiz-progress .qp-step');
+      dots.forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
+      document.getElementById('quiz-current').textContent = '✓';
+      document.getElementById('quiz-of').textContent = '';
+      document.getElementById('quiz-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetQuiz() {
+      quizData = { segment: '', challenge: '', name: '', phone: '' };
+      document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      document.querySelectorAll('.quiz-field').forEach(f => f.value = '');
+      document.getElementById('q-next-1').disabled = true;
+      document.getElementById('q-next-2').disabled = true;
+      goToStep(1);
+    }
+
+    /* Canvas particles */
+    (function(){
+      const c=document.getElementById('hero-canvas');if(!c)return;
+      const ctx=c.getContext('2d');if(!ctx)return;
+      let p=[],a;
+      function rs(){c.width=c.offsetWidth*2;c.height=c.offsetHeight*2;ctx.scale(2,2)}
+      function cp(){p=[];const w=c.offsetWidth,h=c.offsetHeight;for(let i=0;i<40;i++)p.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,size:Math.random()*2+0.5,alpha:Math.random()*0.4+0.1})}
+      function an(){const w=c.offsetWidth,h=c.offsetHeight;ctx.clearRect(0,0,w,h);p.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>w)n.vx*=-1;if(n.y<0||n.y>h)n.vy*=-1;ctx.beginPath();ctx.arc(n.x,n.y,n.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,77,166,${n.alpha})`;ctx.fill()});p.forEach((a,i)=>{p.slice(i+1).forEach(b=>{const dx=a.x-b.x,dy=a.y-b.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<150){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(255,77,166,${0.06*(1-dist/150)})`;ctx.stroke()}})});a=requestAnimationFrame(an)}
+      rs();cp();an();let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{rs();cp()},150)})
+    })();
+
+    /* Stat counters */
+    (function(){
+      const s=document.getElementById('hero-stats');if(!s)return;
+      const obs=new IntersectionObserver((e)=>{e.forEach(e=>{if(e.isIntersecting){s.querySelectorAll('[data-target]').forEach(el=>{const t=Number(el.dataset.target),sfx=el.textContent.replace(/[0-9]/g,'');let c=0,st=Math.ceil(t/60),tm=setInterval(()=>{c+=st;if(c>=t){c=t;clearInterval(tm)}el.textContent=c+sfx},30)});obs.unobserve(s)}})});obs.observe(s)
+    })();
+
+    /* Header scroll */
+    (function(){
+      const h=document.getElementById('site-header');let t=false;
+      window.addEventListener('scroll',()=>{if(!t){requestAnimationFrame(()=>{h.classList.toggle('scrolled',window.scrollY>20);t=false});t=true}})
+    })();
+
+    /* Mobile menu */
+    (function(){
+      const b=document.getElementById('menu-toggle'),n=document.getElementById('mobile-nav');
+      b.addEventListener('click',()=>{n.classList.toggle('open');b.innerHTML=n.classList.contains('open')?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>'});
+      n.querySelectorAll('a').forEach(a=>{a.addEventListener('click',()=>{n.classList.remove('open');b.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>'})})
+    })();
+
+    /* Fade-in scroll */
+    (function(){
+      const observer = new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    })();
+
+    /* Preloader */
+    (function(){setTimeout(()=>document.getElementById('preloader')?.classList.add('hidden'),1500)})();
+
+    /* GSAP Transition Gallery */
+    let transIdx = 0;
+    function goTransition(i) {
+      transIdx = i;
+      const slides = document.querySelectorAll('#transition-gallery .transition-slide');
+      const dots = document.querySelectorAll('#transition-gallery .dot');
+      slides.forEach((s, idx) => {
+        gsap.to(s, { opacity: idx === i ? 1 : 0, duration: 0.8, ease: 'power2.inOut' });
+      });
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[i]) dots[i].classList.add('active');
+    }
+    function autoTransition() {
+      const slides = document.querySelectorAll('#transition-gallery .transition-slide');
+      if (slides.length === 0) return;
+      goTransition((transIdx + 1) % slides.length);
+    }
+
+    /* Init */
+    document.addEventListener('DOMContentLoaded',()=>{
+      renderPortfolio('all');renderSolutions();renderMarketplace();renderCases();renderRoadmap();
+
+      // GSAP: Register ScrollTrigger & animate transition section
+      if (typeof gsap !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate transition gallery text on scroll
+        const transText = document.getElementById('transition-text');
+        if (transText) {
+          gsap.fromTo(transText, { opacity: 0, y: 40 }, {
+            opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
+            scrollTrigger: { trigger: '#transition-gallery', start: 'top 70%', toggleActions: 'play none none none' }
+          });
+        }
+
+        // Start auto-transition
+        setInterval(autoTransition, 4000);
+      }
+    });
+  </script>
+</body>
+</html>
